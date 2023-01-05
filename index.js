@@ -1,7 +1,7 @@
 // Import packages
 const express = require("express");
 const home = require("./routes/home");
-const staticGzip = require('express-static-gzip');
+// const staticGzip = require('express-static-gzip');
 
 // Middlewares
 const app = express();
