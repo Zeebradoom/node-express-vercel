@@ -1,13 +1,14 @@
 // Import packages
 const express = require("express");
 const home = require("./routes/home");
+const staticGzip = require('express-static-gzip');
 
 // Middlewares
 const app = express();
 app.use(express.json());
 
 // Routes
-app.use("/", home);
+app.use('/', staticGzip('frontend'));
 
 // connection
 const port = process.env.PORT || 9001;
