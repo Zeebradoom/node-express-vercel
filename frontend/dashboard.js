@@ -36,32 +36,32 @@ const shorte = () => {
     
     //add fetched changes from api backend thing fuck
 
-    // request.get('/tracksShort', (error, response, body) => {
-    // if (error) {
-    //     console.error(error);
-    // } else {
-    //     console.log(response.statusCode, body);
-    //     let tracksShort = body.tracksShort;
-    //     // Store the data in Local Storage
-    //     let j = 0;
-    //     for (let i = 0; i < 49; i++) {
-    //         //info table
-    //         let song = tracksShort[i];
-    //         let row = document.createElement("tr");
-    //         row.innerHTML = `<td>${song.name}</td><td>${song.album.name}</td><td>${song.artists[0].name}</td>`;
-    //         topSongsTable.appendChild(row);
+    request.get('/tracksShort', (error, response, body) => {
+    if (error) {
+        console.error(error);
+    } else {
+        // console.log(response.statusCode, body);
+        let tracksShort = body.tracksShort;
+        // Store the data in Local Storage
+        let j = 0;
+        for (let i = 0; i < 49; i++) {
+            //info table
+            let song = tracksShort[i];
+            let row = document.createElement("tr");
+            row.innerHTML = `<td>${song.name}</td><td>${song.album.name}</td><td>${song.artists[0].name}</td>`;
+            topSongsTable.appendChild(row);
 
-    //         if (i == 23 || i == 24 || i == 25) {
-    //             j++;
-    //             grid.innerHTML += `<div class="center"></div>`;
-    //         } else {
-    //             let imageUrl = tracksShort[i-j].album.images[1].url;
-    //             let imgElement = `<img src="${imageUrl}" alt="track image">`;
-    //             grid.innerHTML += imgElement;
-    //         }
-    //     }
-    // }
-    // });
+            if (i == 23 || i == 24 || i == 25) {
+                j++;
+                grid.innerHTML += `<div class="center"></div>`;
+            } else {
+                let imageUrl = tracksShort[i-j].album.images[1].url;
+                let imgElement = `<img src="${imageUrl}" alt="track image">`;
+                grid.innerHTML += imgElement;
+            }
+        }
+    }
+    });
 
 }
 
