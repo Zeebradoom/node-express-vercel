@@ -20,21 +20,22 @@ app.get("/login", (req, res) => {
 
 //authorize the user by getting a code
 app.get("/authorize", (req, res) => {
-//   var auth_query_parameters = new URLSearchParams({
-//     response_type: "code",
-//     client_id: client_id,
-//     scope: "user-top-read",
-//     redirect_uri: redirect_uri,
-//   });
+  var auth_query_parameters = new URLSearchParams({
+    response_type: "code",
+    client_id: client_id,
+    scope: "user-top-read",
+    redirect_uri: redirect_uri,
+  });
 
-//   res.redirect(
-//     "https://accounts.spotify.com/authorize?" + auth_query_parameters.toString()
-//   );
-res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
+  res.redirect(
+    "https://accounts.spotify.com/authorize?" + auth_query_parameters.toString()
+  );
+
 });
 
-// //get the access token from the code
-// app.get("/callback", async (req, res) => {
+//get the access token from the code
+app.get("/callback", async (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
 //   const code = req.query.code;
 
 //   var body = new URLSearchParams({
@@ -42,6 +43,7 @@ res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
 //     redirect_uri: redirect_uri,
 //     grant_type: "authorization_code",
 //   });
+
 
 //   const response = await fetch("https://accounts.spotify.com/api/token", {
 //     method: "post",
@@ -58,7 +60,7 @@ res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
 //   global.access_token = data.access_token;
   
 //   res.redirect(`/frontend/dashboard.html`);
-// });
+});
 
 
 // //generalized function to get data from the spotify api

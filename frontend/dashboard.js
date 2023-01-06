@@ -32,7 +32,7 @@
 //     topSongsTable.innerHTML = "";
     
 //     //add fetched changes from api backend thing fuck
-//     fetch('https://node-express-vercel-sigma.vercel.app/tracksShort')
+//     fetch('/tracksShort')
 //         .then(response => response.json())
 //         .then(data => {
 //             console.log(data);
