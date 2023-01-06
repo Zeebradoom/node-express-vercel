@@ -81,13 +81,11 @@ app.get("/callback", (req, res) => {
         Buffer.from(client_id + ":" + client_secret).toString("base64"),
     },
   }, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
       const data = JSON.parse(body);
       global.access_token = data.access_token;
-      
-    } else {
-      // handle error
-    }
+      console.log(data + "data");
+      console.log(global.access_token  + "access token");
+
     res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
   });
 });
@@ -107,8 +105,9 @@ app.get("/callback", (req, res) => {
 
 // //generalized function to get data from the spotify api
 async function getData(endpoint) {
-    console.log(global.access_token);
+   
   return new Promise((resolve, reject) => {
+     console.log(global.access_token + "access token2");
     request(
       {
         url: "https://api.spotify.com/v1" + endpoint,
