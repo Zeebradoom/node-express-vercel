@@ -86,7 +86,6 @@ const shorte = () => {
 
     fetch('https://node-express-vercel-production.up.railway.app/tracksShort')
         .then((response) => {
-            console.log(response.json() + "YOOO");
             response.json();})
         .then((body) => {
             console.log(body);
