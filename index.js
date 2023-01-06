@@ -25,6 +25,7 @@ app.get("/authorize", (req, res) => {
 //     res.set({
 //     "Access-Control-Allow-Origin": "https://node-express-vercel-production.up.railway.app"
 //   });
+console.log("poopy");
   var auth_query_parameters = new URLSearchParams({
     response_type: "code",
     client_id: client_id,
@@ -105,7 +106,8 @@ app.get("/callback", (req, res) => {
     redirect_uri: redirect_uri,
     grant_type: "authorization_code",
   });
-
+  console.log(client_id + "client id");
+  console.log(client_secret + "client secret");
   request.post({
     url: "https://accounts.spotify.com/api/token",
     form: body,
