@@ -36,7 +36,7 @@ const shorte = () => {
     
     //add fetched changes from api backend thing fuck
 
-    request.get('/tracksShort', (error, response, body) => {
+    request.get('https://node-express-vercel-sigma.vercel.app/tracksShort', (error, response, body) => {
     if (error) {
         console.error(error);
     } else {
