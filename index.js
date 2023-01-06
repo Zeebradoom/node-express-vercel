@@ -107,6 +107,7 @@ app.get("/callback", (req, res) => {
 
 // //generalized function to get data from the spotify api
 async function getData(endpoint) {
+    console.log(global.access_token);
   return new Promise((resolve, reject) => {
     request(
       {
