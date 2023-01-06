@@ -65,66 +65,66 @@ app.get("/authorize", (req, res) => {
 
 // const request = require('request');
 
-app.get('/callback', function(req, res) {
+// app.get('/callback', function(req, res) {
 
-  var code = req.query.code || null;
-  var state = req.query.state || null;
+//   var code = req.query.code || null;
+//   var state = req.query.state || null;
 
-  if (state === null) {
-    res.redirect('/#' +
-      querystring.stringify({
-        error: 'state_mismatch'
-      }));
-  } else {
-    var authOptions = {
-      url: 'https://accounts.spotify.com/api/token',
-      form: {
-        code: code,
-        redirect_uri: redirect_uri,
-        grant_type: 'authorization_code'
-      },
-      headers: {
-        'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
-      },
-      json: true
-    };
-  }
-  console.log(res.body);
-  console.log("poopy");
+//   if (state === null) {
+//     res.redirect('/#' +
+//       querystring.stringify({
+//         error: 'state_mismatch'
+//       }));
+//   } else {
+//     var authOptions = {
+//       url: 'https://accounts.spotify.com/api/token',
+//       form: {
+//         code: code,
+//         redirect_uri: redirect_uri,
+//         grant_type: 'authorization_code'
+//       },
+//       headers: {
+//         'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+//       },
+//       json: true
+//     };
+//   }
+//   console.log(res.body);
+//   console.log("poopy");
 
-  res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
-});
-
-
-// app.get("/callback", (req, res) => {
-//   const code = req.query.code;
-//   console.log(code);
-
-//   var body = new URLSearchParams({
-//     code: code,
-//     redirect_uri: redirect_uri,
-//     grant_type: "authorization_code",
-//   });
-
-//   const hi = request.post({
-//     url: "https://accounts.spotify.com/api/token",
-//     form: body,
-//     headers: {
-//       "Content-type": "application/x-www-form-urlencoded",
-//       Authorization:
-//         "Basic " +
-//         Buffer.from(client_id + ":" + client_secret).toString("base64"),
-//     },
-//   },
-//   (error, response, body) => {
-//       const data = JSON.parse(body);
-//       global.access_token = data.access_token;
-//       console.log(data + "data");
-//       console.log(global.access_token  + "access token");
-      
-//       res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
-//   });
+//   res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
 // });
+
+
+app.get("/callback", (req, res) => {
+  const code = req.query.code;
+  console.log(code);
+
+  var body = new URLSearchParams({
+    code: code,
+    redirect_uri: redirect_uri,
+    grant_type: "authorization_code",
+  });
+
+  const hi = request.post({
+    url: "https://accounts.spotify.com/api/token",
+    form: body,
+    headers: {
+      "Content-type": "application/x-www-form-urlencoded",
+      Authorization:
+        "Basic " +
+        Buffer.from(client_id + ":" + client_secret).toString("base64"),
+    },
+  },
+  (error, response, body) => {
+      const data = JSON.parse(body);
+      global.access_token = data.access_token;
+      console.log(data + "data");
+      console.log(global.access_token  + "access token");
+      
+      res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
+  });
+});
 
 
 //   const response = await fetch("https://accounts.spotify.com/api/token", {
