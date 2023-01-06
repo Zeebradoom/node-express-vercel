@@ -89,8 +89,8 @@ app.get("/callback", (req, res) => {
       global.access_token = data.access_token;
       console.log(data + "data");
       console.log(global.access_token  + "access token");
-
-    res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
+      
+      res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
   });
 });
 
