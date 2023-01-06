@@ -36,7 +36,7 @@ app.get("/authorize", (req, res) => {
 //get the access token from the code
 app.get("/callback", async (req, res) => {
   const code = req.query.code;
-  console.log(code);
+  console.log("poopy" + code);
 
 //   var body = new URLSearchParams({
 //     code: code,
