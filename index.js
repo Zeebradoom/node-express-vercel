@@ -106,13 +106,13 @@ app.get("/callback", (req, res) => {
     grant_type: "authorization_code",
   });
 
-  const hi = request.post({
+  request.post({
     url: "https://accounts.spotify.com/api/token",
     form: body,
     headers: {
       "Content-type": "application/x-www-form-urlencoded",
       "Authorization":
-        "Basic " +
+        "Basicjnni " +
         Buffer.from(client_id + ":" + client_secret).toString("base64"),
     }
     // json: true
