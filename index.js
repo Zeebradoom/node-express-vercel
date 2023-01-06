@@ -35,31 +35,30 @@ app.get("/authorize", (req, res) => {
 
 //get the access token from the code
 app.get("/callback", async (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
-//   const code = req.query.code;
+  const code = req.query.code;
 
-//   var body = new URLSearchParams({
-//     code: code,
-//     redirect_uri: redirect_uri,
-//     grant_type: "authorization_code",
-//   });
+  var body = new URLSearchParams({
+    code: code,
+    redirect_uri: redirect_uri,
+    grant_type: "authorization_code",
+  });
 
 
-//   const response = await fetch("https://accounts.spotify.com/api/token", {
-//     method: "post",
-//     body: body,
-//     headers: {
-//       "Content-type": "application/x-www-form-urlencoded",
-//       Authorization:
-//         "Basic " +
-//         Buffer.from(client_id + ":" + client_secret).toString("base64"),
-//     },
-//   });
+  const response = await fetch("https://accounts.spotify.com/api/token", {
+    method: "post",
+    body: body,
+    headers: {
+      "Content-type": "application/x-www-form-urlencoded",
+      Authorization:
+        "Basic " +
+        Buffer.from(client_id + ":" + client_secret).toString("base64"),
+    },
+  });
 
-//   const data = await response.json();
-//   global.access_token = data.access_token;
+  const data = await response.json();
+  global.access_token = data.access_token;
   
-//   res.redirect(`/frontend/dashboard.html`);
+  res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
 });
 
 
