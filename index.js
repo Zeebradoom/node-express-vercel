@@ -36,26 +36,62 @@ app.get("/authorize", (req, res) => {
 });
 
 //get the access token from the code
-app.get("/callback", async (req, res) => {
-  const code = req.query.code;
-  console.log("poopy" + code);
+// app.get("/callback", async (req, res) => {
+//   const code = req.query.code;
+//   console.log("poopy" + code);
 
-//   var body = new URLSearchParams({
-//     code: code,
-//     redirect_uri: redirect_uri,
-//     grant_type: "authorization_code",
-//   });
-    request.post({
+// //   var body = new URLSearchParams({
+// //     code: code,
+// //     redirect_uri: redirect_uri,
+// //     grant_type: "authorization_code",
+// //   });
+//     request.post({
+//     headers: {
+//         'Content-type': 'application/x-www-form-urlencoded',
+//         'Authorization': 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64')
+//     },
+//     url: 'https://accounts.spotify.com/api/token',
+//     body: 'code=' + code + '&redirect_uri=' + redirect_uri + '&grant_type=authorization_code'
+//     }, (error, response, body) => {
+//     const data = body;
+//   global.access_token = data.access_token;
+//     });
+  
+//   res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
+// });
+
+// const request = require('request');
+
+app.get("/callback", (req, res) => {
+  const code = req.query.code;
+
+  var body = new URLSearchParams({
+    code: code,
+    redirect_uri: redirect_uri,
+    grant_type: "authorization_code",
+  });
+
+  request.post({
+    url: "https://accounts.spotify.com/api/token",
+    form: body,
     headers: {
-        'Content-type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64')
+      "Content-type": "application/x-www-form-urlencoded",
+      Authorization:
+        "Basic " +
+        Buffer.from(client_id + ":" + client_secret).toString("base64"),
     },
-    url: 'https://accounts.spotify.com/api/token',
-    body: 'code=' + code + '&redirect_uri=' + redirect_uri + '&grant_type=authorization_code'
-    }, (error, response, body) => {
-    const data = body;
-  global.access_token = data.access_token;
-    });
+  }, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      const data = JSON.parse(body);
+      global.access_token = data.access_token;
+      
+    } else {
+      // handle error
+    }
+    res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
+  });
+});
+
 
 //   const response = await fetch("https://accounts.spotify.com/api/token", {
 //     method: "post",
@@ -67,11 +103,6 @@ app.get("/callback", async (req, res) => {
 //         Buffer.from(client_id + ":" + client_secret).toString("base64"),
 //     },
 //   });
-
-  
-  
-  res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
-});
 
 
 // //generalized function to get data from the spotify api
