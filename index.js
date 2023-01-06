@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(__dirname + "/frontend/"));
 
-const redirect_uri = "node-express-vercel-production.up.railway.app/callback"; //whitelisted redirect uri via developer dashboard
+const redirect_uri = "https://node-express-vercel-production.up.railway.app/callback"; //whitelisted redirect uri via developer dashboard
 const client_id = "bc138b8d2f814b4d881e26d13cccbf72"; //client id from developer dashboard
 const client_secret = "dd8bea225a2041c28b59846c68adee10"; //client secret from developer dashboard
 
