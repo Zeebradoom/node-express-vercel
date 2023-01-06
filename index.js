@@ -127,7 +127,7 @@ async function getData(endpoint) {
 }
 
 // //get the photos of the top 100 tracks albums
-app.get("/tracksShort", async (req, res) => {
+app.get("https://node-express-vercel-production.up.railway.app/tracksShort", async (req, res) => {
   const userInfo = await getData("/me");
   const tracksShort = await getData("/me/top/tracks?time_range=short_term&limit=50");
 
