@@ -1,6 +1,7 @@
 // Import packages
 const express = require("express");
 const path = require("path");
+const request = require('request');
 
 
 // Middlewares
@@ -43,7 +44,16 @@ app.get("/callback", async (req, res) => {
 //     redirect_uri: redirect_uri,
 //     grant_type: "authorization_code",
 //   });
-
+request.post({
+  headers: {
+    'Content-type': 'application/x-www-form-urlencoded',
+    'Authorization': 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64')
+  },
+  url: 'https://accounts.spotify.com/api/token',
+  body: 'code=' + code + '&redirect_uri=' + redirect_uri + '&grant_type=authorization_code'
+}, (error, response, body) => {
+  console.log(body);
+});
 
 //   const response = await fetch("https://accounts.spotify.com/api/token", {
 //     method: "post",
@@ -56,8 +66,8 @@ app.get("/callback", async (req, res) => {
 //     },
 //   });
 
-//   const data = await response.json();
-//   global.access_token = data.access_token;
+  const data = await response.json();
+  global.access_token = data.access_token;
   
   res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
 });
