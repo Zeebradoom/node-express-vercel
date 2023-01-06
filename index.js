@@ -62,35 +62,7 @@ app.get("/authorize", (req, res) => {
 
 // const request = require('request');
 
-// app.get("/callback", (req, res) => {
-//   const code = req.query.code;
-
-//   var body = new URLSearchParams({
-//     code: code,
-//     redirect_uri: redirect_uri,
-//     grant_type: "authorization_code",
-//   });
-
-//   request.post({
-//     url: "https://accounts.spotify.com/api/token",
-//     form: body,
-//     headers: {
-//       "Content-type": "application/x-www-form-urlencoded",
-//       Authorization:
-//         "Basic " +
-//         Buffer.from(client_id + ":" + client_secret).toString("base64"),
-//     },
-//   }, (error, response, body) => {
-//       const data = JSON.parse(body);
-//       global.access_token = data.access_token;
-//       console.log(data + "data");
-//       console.log(global.access_token  + "access token");
-
-//     res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
-//   });
-// });
-
-app.get("/callback", async (req, res) => {
+app.get("/callback", (req, res) => {
   const code = req.query.code;
 
   var body = new URLSearchParams({
@@ -99,22 +71,23 @@ app.get("/callback", async (req, res) => {
     grant_type: "authorization_code",
   });
 
-  const response = await fetch("https://accounts.spotify.com/api/token", {
-    method: "post",
-    body: body,
+  request.post({
+    url: "https://accounts.spotify.com/api/token",
+    form: body,
     headers: {
       "Content-type": "application/x-www-form-urlencoded",
       Authorization:
         "Basic " +
         Buffer.from(client_id + ":" + client_secret).toString("base64"),
     },
+  }, (error, response, body) => {
+      const data = JSON.parse(body);
+      global.access_token = data.access_token;
+      console.log(data + "data");
+      console.log(global.access_token  + "access token");
+
+    res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
   });
-
-  const data = await response.json();
-  global.access_token = data.access_token;
-  
-  res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
-
 });
 
 
