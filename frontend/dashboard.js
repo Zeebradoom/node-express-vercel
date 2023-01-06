@@ -1,4 +1,4 @@
-// const request = require('request');
+const request = require('request');
 
 document.addEventListener("DOMContentLoaded", function(event) {
   // Check if the document is ready
