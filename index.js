@@ -75,26 +75,35 @@ app.get("/callback", async (req, res) => {
 
 
 // //generalized function to get data from the spotify api
-// async function getData(endpoint) {
-//   const response = await fetch("https://api.spotify.com/v1" + endpoint, {
-//     method: "get",
-//     headers: {
-//       Authorization: "Bearer " + global.access_token,
-//     },
-//   });
-
-//   const data = await response.json();
-//   return data;
-// }
+async function getData(endpoint) {
+  return new Promise((resolve, reject) => {
+    request(
+      {
+        url: "https://api.spotify.com/v1" + endpoint,
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + global.access_token,
+        },
+      },
+      (error, response, body) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(JSON.parse(body));
+      }
+    );
+  });
+}
 
 // //get the photos of the top 100 tracks albums
-// app.get("/tracksShort", async (req, res) => {
-//   const userInfo = await getData("/me");
-//   const tracksShort = await getData("/me/top/tracks?time_range=short_term&limit=50");
+app.get("/tracksShort", async (req, res) => {
+  const userInfo = await getData("/me");
+  const tracksShort = await getData("/me/top/tracks?time_range=short_term&limit=50");
 
-//   res.json({ user: userInfo, 
-//     tracksShort: tracksShort.items});
-// });
+  res.json({ user: userInfo, 
+    tracksShort: tracksShort.items
+  });
+});
 
 // app.get("/tracksMedium", async (req, res) => {
 //   const userInfo = await getData("/me");
