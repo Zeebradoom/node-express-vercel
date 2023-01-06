@@ -128,6 +128,7 @@ async function getData(endpoint) {
 
 // //get the photos of the top 100 tracks albums
 app.get("/tracksShort", async (req, res) => {
+    console.log("WE GOT HERE BITCHES");
   const userInfo = await getData("/me");
   const tracksShort = await getData("/me/top/tracks?time_range=short_term&limit=50");
 
