@@ -87,6 +87,7 @@ const shorte = () => {
     fetch('https://node-express-vercel-production.up.railway.app/tracksShort')
         .then((response) => response.json())
         .then((body) => {
+            console.log(body);
             let tracksShort = body.tracksShort;
             // Store the data in Local Storage
             let j = 0;
