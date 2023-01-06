@@ -110,7 +110,7 @@ app.get("/callback", (req, res) => {
     url: "https://accounts.spotify.com/api/token",
     form: body,
     headers: {
-    //   "Content-type": "application/x-www-form-urlencoded",
+      "Content-type": "application/x-www-form-urlencoded",
       "Authorization":
         "Basic " +
         Buffer.from(client_id + ":" + client_secret).toString("base64"),
