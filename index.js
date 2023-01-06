@@ -91,7 +91,8 @@ app.get('/callback', function(req, res) {
   }
   console.log(res.body);
   console.log("poopy");
-  
+
+  res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
 });
 
 
