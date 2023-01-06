@@ -113,9 +113,9 @@ app.get("/callback", async (req, res) => {
   const data = await response.json();
   global.access_token = data.access_token;
   
-  res.redirect(`http://127.0.0.1:${port}/views/dashboard.html`);
+  res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
 
-  
+});
 
 
 //   const response = await fetch("https://accounts.spotify.com/api/token", {
