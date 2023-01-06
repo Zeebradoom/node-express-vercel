@@ -14,8 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^3.2.0",
     "express": "^4.17.3",
+    "node-fetch": "^3.3.0",
     "nodemon": "^2.0.15"
-  }
+  },
+  "type": "module"
 }
