@@ -85,7 +85,9 @@ const shorte = () => {
     //add fetched changes from api backend thing fuck
 
     fetch('https://node-express-vercel-production.up.railway.app/tracksShort')
-        .then((response) => response.json())
+        .then((response) => {
+            console.log(response.json() + "YOOO");
+            response.json();})
         .then((body) => {
             console.log(body);
             let tracksShort = body.tracksShort;
