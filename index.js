@@ -20,85 +20,86 @@ app.get("/login", (req, res) => {
 
 //authorize the user by getting a code
 app.get("/authorize", (req, res) => {
-  var auth_query_parameters = new URLSearchParams({
-    response_type: "code",
-    client_id: client_id,
-    scope: "user-top-read",
-    redirect_uri: redirect_uri,
-  });
+//   var auth_query_parameters = new URLSearchParams({
+//     response_type: "code",
+//     client_id: client_id,
+//     scope: "user-top-read",
+//     redirect_uri: redirect_uri,
+//   });
 
-  res.redirect(
-    "https://accounts.spotify.com/authorize?" + auth_query_parameters.toString()
-  );
+//   res.redirect(
+//     "https://accounts.spotify.com/authorize?" + auth_query_parameters.toString()
+//   );
+res.sendFile(path.join(__dirname, "frontend", "dashboard.html"));
 });
 
-//get the access token from the code
-app.get("/callback", async (req, res) => {
-  const code = req.query.code;
+// //get the access token from the code
+// app.get("/callback", async (req, res) => {
+//   const code = req.query.code;
 
-  var body = new URLSearchParams({
-    code: code,
-    redirect_uri: redirect_uri,
-    grant_type: "authorization_code",
-  });
+//   var body = new URLSearchParams({
+//     code: code,
+//     redirect_uri: redirect_uri,
+//     grant_type: "authorization_code",
+//   });
 
-  const response = await fetch("https://accounts.spotify.com/api/token", {
-    method: "post",
-    body: body,
-    headers: {
-      "Content-type": "application/x-www-form-urlencoded",
-      Authorization:
-        "Basic " +
-        Buffer.from(client_id + ":" + client_secret).toString("base64"),
-    },
-  });
+//   const response = await fetch("https://accounts.spotify.com/api/token", {
+//     method: "post",
+//     body: body,
+//     headers: {
+//       "Content-type": "application/x-www-form-urlencoded",
+//       Authorization:
+//         "Basic " +
+//         Buffer.from(client_id + ":" + client_secret).toString("base64"),
+//     },
+//   });
 
-  const data = await response.json();
-  global.access_token = data.access_token;
+//   const data = await response.json();
+//   global.access_token = data.access_token;
   
-  res.redirect(`/frontend/dashboard.html`);
-});
+//   res.redirect(`/frontend/dashboard.html`);
+// });
 
 
-//generalized function to get data from the spotify api
-async function getData(endpoint) {
-  const response = await fetch("https://api.spotify.com/v1" + endpoint, {
-    method: "get",
-    headers: {
-      Authorization: "Bearer " + global.access_token,
-    },
-  });
+// //generalized function to get data from the spotify api
+// async function getData(endpoint) {
+//   const response = await fetch("https://api.spotify.com/v1" + endpoint, {
+//     method: "get",
+//     headers: {
+//       Authorization: "Bearer " + global.access_token,
+//     },
+//   });
 
-  const data = await response.json();
-  return data;
-}
+//   const data = await response.json();
+//   return data;
+// }
 
-//get the photos of the top 100 tracks albums
-app.get("/tracksShort", async (req, res) => {
-  const userInfo = await getData("/me");
-  const tracksShort = await getData("/me/top/tracks?time_range=short_term&limit=50");
+// //get the photos of the top 100 tracks albums
+// app.get("/tracksShort", async (req, res) => {
+//   const userInfo = await getData("/me");
+//   const tracksShort = await getData("/me/top/tracks?time_range=short_term&limit=50");
 
-  res.json({ user: userInfo, 
-    tracksShort: tracksShort.items});
-});
+//   res.json({ user: userInfo, 
+//     tracksShort: tracksShort.items});
+// });
 
-app.get("/tracksMedium", async (req, res) => {
-  const userInfo = await getData("/me");
-  const tracksMedium = await getData("/me/top/tracks?time_range=medium_term&limit=50");
+// app.get("/tracksMedium", async (req, res) => {
+//   const userInfo = await getData("/me");
+//   const tracksMedium = await getData("/me/top/tracks?time_range=medium_term&limit=50");
 
-  res.json({ user: userInfo, 
-    tracksMedium: tracksMedium.items});
-});
+//   res.json({ user: userInfo, 
+//     tracksMedium: tracksMedium.items});
+// });
 
 
-app.get("/tracksLong", async (req, res) => {
-  const userInfo = await getData("/me");
-  const tracksLong = await getData("/me/top/tracks?time_range=long_term&limit=50");
+// app.get("/tracksLong", async (req, res) => {
+//   const userInfo = await getData("/me");
+//   const tracksLong = await getData("/me/top/tracks?time_range=long_term&limit=50");
 
-  res.json({ user: userInfo, 
-     tracksLong: tracksLong.items,});
-});
+//   res.json({ user: userInfo, 
+//      tracksLong: tracksLong.items,});
+// });
 
-// connection
-const port = process.env.PORT || 9001;
-app.listen(port, () => console.log(`Listening to port ${port}`));
+// // connection
+// const port = process.env.PORT || 9001;
+// app.listen(port, () => console.log(`Listening to port ${port}`));
