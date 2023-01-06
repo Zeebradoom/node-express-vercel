@@ -1,3 +1,5 @@
+const request = require('request');
+
 document.addEventListener("DOMContentLoaded", function(event) {
   // Check if the document is ready
     const grid = document.querySelector('.grid');
