@@ -98,8 +98,9 @@ console.log("poopy");
 
 
 app.get("/callback", (req, res) => {
-  const code = req.query.code;
+  const code = req.query.code; //this is from url
   console.log(code);
+  console.log("ops");
 
   var body = new URLSearchParams({
     code: code,
