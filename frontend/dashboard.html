@@ -84,30 +84,30 @@ async function shorte () {
 
         //add fetched changes from api backend thing fuck
         try {
-            const response = await fetch('https://node-express-vercel-production.up.railway.app/tracksShort');
-            const body = await response.json();
-            console.log(body);
+            // const response = await fetch('https://node-express-vercel-production.up.railway.app/tracksShort');
+            // const body = await response.json();
+            console.log("FAT FUCK");
 
             // use the body data as needed
-            let tracksShort = body.tracksShort;
-            // Store the data in Local Storage
-            let j = 0;
-            for (let i = 0; i < 49; i++) {
-                //info table
-                let song = tracksShort[i];
-                let row = document.createElement("tr");
-                row.innerHTML = `<td>${song.name}</td><td>${song.album.name}</td><td>${song.artists[0].name}</td>`;
-                topSongsTable.appendChild(row);
+            // let tracksShort = body.tracksShort;
+            // // Store the data in Local Storage
+            // let j = 0;
+            // for (let i = 0; i < 49; i++) {
+            //     //info table
+            //     let song = tracksShort[i];
+            //     let row = document.createElement("tr");
+            //     row.innerHTML = `<td>${song.name}</td><td>${song.album.name}</td><td>${song.artists[0].name}</td>`;
+            //     topSongsTable.appendChild(row);
 
-                if (i == 23 || i == 24 || i == 25) {
-                    j++;
-                    grid.innerHTML += `<div class="center"></div>`;
-                } else {
-                    let imageUrl = tracksShort[i - j].album.images[1].url;
-                    let imgElement = `<img src="${imageUrl}" alt="track image">`;
-                    grid.innerHTML += imgElement;
-                }
-            }
+            //     if (i == 23 || i == 24 || i == 25) {
+            //         j++;
+            //         grid.innerHTML += `<div class="center"></div>`;
+            //     } else {
+            //         let imageUrl = tracksShort[i - j].album.images[1].url;
+            //         let imgElement = `<img src="${imageUrl}" alt="track image">`;
+            //         grid.innerHTML += imgElement;
+            //     }
+            // }
         } catch (error) {
         }};
 
