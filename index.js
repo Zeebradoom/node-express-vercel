@@ -114,8 +114,8 @@ app.get("/callback", (req, res) => {
       "Authorization":
         "Basic " +
         Buffer.from(client_id + ":" + client_secret).toString("base64"),
-    },
-    json: true
+    }
+    // json: true
   },
   (error, response, body) => {
       const data = JSON.parse(body);
