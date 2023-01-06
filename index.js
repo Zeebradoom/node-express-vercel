@@ -55,7 +55,7 @@ app.get("/callback", async (req, res) => {
   const data = await response.json();
   global.access_token = data.access_token;
   
-  res.redirect(`/views/dashboard.html`);
+  res.redirect(`/frontend/dashboard.html`);
 });
 
 
