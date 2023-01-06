@@ -1,9 +1,6 @@
 // Import packages
-// const express = require("express");
-// const path = require("path");
-import path from "path";
-import express from "express";
-import fetch from "node-fetch";
+const express = require("express");
+const path = require("path");
 
 
 // Middlewares
