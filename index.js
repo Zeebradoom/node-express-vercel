@@ -22,6 +22,9 @@ app.get("/", (req, res) => {
 
 //authorize the user by getting a code
 app.get("/authorize", (req, res) => {
+    res.set({
+    "Access-Control-Allow-Origin": "https://node-express-vercel-production.up.railway.app"
+  });
   var auth_query_parameters = new URLSearchParams({
     response_type: "code",
     client_id: client_id,
