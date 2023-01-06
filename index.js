@@ -16,7 +16,7 @@ const client_secret = "dd8bea225a2041c28b59846c68adee10"; //client secret from d
 global.access_token;
 
 // Routes
-app.get("/login", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "login.html"));
 });
 
