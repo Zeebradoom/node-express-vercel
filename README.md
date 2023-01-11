@@ -5,6 +5,7 @@ git clone https://github.com/Zeebradoom/node-express-vercel.git
 go to https://developer.spotify.com/dashboard/login and create an account.
 Click create an app, if prompted click to allow access to top songs/artists.
 When you are in the dashboard, click Edit Settings, then white list https:/localhost:3000/callback
+Also update the client_id and client_secret in the code (in index.js)
 
 Then npm i
 npm run
