@@ -8,7 +8,7 @@ When you are in the dashboard, click Edit Settings, then white list https:/local
 Also update the client_id and client_secret in the code (in index.js)
 
 Then npm i
-npm run
+npm run start
 
 Should work : )
 
